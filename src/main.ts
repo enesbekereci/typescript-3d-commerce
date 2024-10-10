@@ -9,6 +9,7 @@ import {
   onDocumentKeyUp,
   onPointerMove,
 } from "./inputControl.ts";
+import { addGUI } from "./addGUI.ts";
 
 const scene = new THREE.Scene();
 
@@ -19,6 +20,8 @@ renderer.setClearColor(0xadd8e6, 1);
 const canvasName = new URL(import.meta.url).searchParams.get("sceneName");
 console.log(canvasName);
 var container = document.getElementById(canvasName || "canvas-name");
+var guicontainer = document.getElementById("lilgui");
+
 const width = parseInt(container?.getAttribute("width") || "100");
 const height = parseInt(container?.getAttribute("height") || "100");
 
@@ -67,6 +70,8 @@ document.addEventListener("pointermove", (event: MouseEvent) => {
 //document.addEventListener( 'pointerdown', onPointerDown );
 document.addEventListener("keydown", onDocumentKeyDown);
 document.addEventListener("keyup", onDocumentKeyUp);
+
+addGUI(guicontainer!)
 
 function animate() {
   requestAnimationFrame(animate);

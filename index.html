@@ -21,10 +21,15 @@
         background: rgba(175, 224, 255, 0.5);
         color: #000000;
       }
+      #lilgui{
+        position:absolute;
+        z-index:1;
+      }
     </style>
     <script type="module" src="src/main.ts?sceneName=canvas3d"></script>
   </head>
   <body>
+    <div id="lilgui" width="640" height="480"></div>
     <div id="canvas3d" width="640" height="480"></div>
   </body>
 </html>
