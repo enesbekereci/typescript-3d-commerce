@@ -3,7 +3,7 @@ import { CSS2DObject } from "three/addons/renderers/CSS2DRenderer.js";
 
 function AddLabel(
   name: string,
-  mesh: { mesh: THREE.Object3D<THREE.Object3DEventMap> },
+  mesh: THREE.Object3D,
 ) {
   const moonDiv = document.createElement("div");
   moonDiv.className = "label";
@@ -16,7 +16,7 @@ function AddLabel(
   moonLabel.position.set(0, 0, 0);
   moonLabel.center.set(0.5, 0);
   moonLabel.layers.set(0);
-  mesh.mesh.add(moonLabel);
+  mesh.add(moonLabel);
 }
 
 export { AddLabel };

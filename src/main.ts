@@ -12,10 +12,9 @@ import {
   onPointerMove,
 } from "./inputControl.ts";
 import { addGUI } from "./addGUI.ts";
-
+import { addToAnimList, animateAll } from "./animator.ts";
 
 const scene = new THREE.Scene();
-
 const camera = new THREE.PerspectiveCamera(55, 640 / 480, 0.1, 1000);
 
 const renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -46,21 +45,13 @@ let pickaxe = AddObject(scene, "tools/pickaxe.glb", [1, 0, 0]);
 let shovel = AddObject(scene, "tools/shovel.glb", [2, 0, 0]);
 let hoe = AddObject(scene, "tools/hoe.glb", [0, 0, 0]);
 let handle = AddObject(scene, "tools/handle.glb", [0, -2, 0]);
-scene.add(axe.mesh);
-AddLabel("Axe", axe);
-scene.add(hammer.mesh);
-AddLabel("Hammer", hammer);
-scene.add(pickaxe.mesh);
-AddLabel("Pickaxe", pickaxe);
-scene.add(shovel.mesh);
-AddLabel("Shovel", shovel);
-scene.add(hoe.mesh);
-AddLabel("Hoe", hoe);
-scene.add(handle.mesh);
-AddLabel("Handle", handle);
 
-addClickable(hammer.mesh)
-addClickable(axe.mesh)
+hammer.then((mesh) => { addToAnimList(mesh, 0.05); scene.add(mesh); addClickable(mesh); AddLabel("Hammer", mesh) })
+axe.then((mesh) => { addToAnimList(mesh, 0.1); scene.add(mesh); addClickable(mesh); AddLabel("Axe", mesh); })
+pickaxe.then((mesh) => { addToAnimList(mesh, 0.15); scene.add(mesh); addClickable(mesh); AddLabel("Pickaxe", mesh) })
+shovel.then((mesh) => { addToAnimList(mesh, 0.2); scene.add(mesh); addClickable(mesh); AddLabel("Shovel", mesh) })
+hoe.then((mesh) => { addToAnimList(mesh, 0.25); scene.add(mesh); addClickable(mesh); AddLabel("Hoe", mesh) })
+handle.then((mesh) => { addToAnimList(mesh, 0.3); scene.add(mesh); addClickable(mesh); AddLabel("Handle", mesh) })
 
 const labelRenderer = new CSS2DRenderer();
 labelRenderer.setSize(width, height); //window.innerWidth, window.innerHeight );
@@ -81,20 +72,8 @@ addGUI(guicontainer!)
 
 function animate() {
   requestAnimationFrame(animate);
-  if (hammer != undefined && hammer.mesh != undefined) {
-    hammer.mesh.rotation.y += 0.01;
-  }
-  if (axe != undefined && axe.mesh != undefined) {
-    axe.mesh.rotation.y += 0.01;
-  }
-  if (hoe != undefined && hoe.mesh != undefined) {
-    hoe.mesh.rotation.y += 0.01;
-  }
-  if (handle != undefined && handle.mesh != undefined) {
-    handle.mesh.rotation.x += 0.01;
-    handle.mesh.rotation.y += 0.01;
-    handle.mesh.rotation.z += 0.01;
-  }
+  animateAll();
+
   sphere.position.set(pointer.x * 2, pointer.y * 2, 0);
   renderer.render(scene, camera);
   labelRenderer.render(scene, camera);
