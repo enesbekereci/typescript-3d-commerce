@@ -1,4 +1,40 @@
-/*TODO move css to style.css file*/
+body {
+  margin: 0;
+}
+.label {
+  color: #ffffff;
+  font-family: sans-serif;
+  border: 1px solid;
+  border-radius: 5px;
+  padding: 2px;
+  background: rgba(74, 121, 197, 0.5);
+}
+.label:hover {
+  box-shadow: 0px 0px 6px rgba(0, 119, 255, 0.75);
+  border: 1px solid rgba(127, 255, 255, 0.75);
+  background: rgba(175, 224, 255, 0.5);
+  color: #000000;
+}
+#lilgui{
+  position:absolute;
+  z-index:10;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  width: 80%;
+  max-width: 600px;
+  margin: 10px;
+}
+.box {
+  background-color: #ffffff;
+  border: 2px solid #007bff;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
 /* :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;

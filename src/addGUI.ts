@@ -5,6 +5,7 @@ const params = {
     toggle_1: true,
     toggle_2: true,
     dropdown:"Hello",
+    text:"input",
     button_1: function () {
 
     },
@@ -19,6 +20,7 @@ function addGUI(container:HTMLElement){
     gui.add( params, 'toggle_2' ).onChange( function () {        alert("toggle_2")    } );
     gui.add( params, 'button_1' );
     gui.add( params, 'button_2' );
+    gui.add( params, 'text' );
     gui.add( params, 'dropdown', [ 'Hello', 'option_1', 'option_2', 'option_3' ] ).onChange( function () {
         alert("Dropdown")
     } );

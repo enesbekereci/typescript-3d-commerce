@@ -1,10 +1,12 @@
 {
-    "background": "background_model",
-    "objects": [
+    "name": "title",
+    "file":"",
+    "parts": [
         {
             "object_model": "object_model_file",
             "position": "0:0:0",
             "rotation": "0:0:0",
+            "type":"",
             "objects": [
                 {
                     "name": "handle_1",
