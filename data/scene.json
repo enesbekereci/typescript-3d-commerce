@@ -1,0 +1,20 @@
+{
+    "background": "background_model",
+    "objects": [
+        {
+            "object_model": "object_model_file",
+            "position": "0:0:0",
+            "rotation": "0:0:0",
+            "objects": [
+                {
+                    "name": "handle_1",
+                    "func": "mov:x:5"
+                },
+                {
+                    "name": "handle_2",
+                    "func": "rot:x:5"
+                }
+            ]
+        }
+    ]
+}

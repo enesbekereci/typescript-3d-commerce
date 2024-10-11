@@ -5,25 +5,25 @@ function AddObject(
   name: string,
   pos: THREE.Vector3Tuple,
 ): { mesh: THREE.Object3D<THREE.Object3DEventMap> } {
-  //let h :
-  let mesh: { mesh: THREE.Object3D<THREE.Object3DEventMap> } = {
-    mesh: new THREE.Object3D<THREE.Object3DEventMap>(),
+  let sceneMesh: { mesh: THREE.Object3D } = {
+    mesh: new THREE.Object3D(),
   };
   const loader = new GLTFLoader();
   loader.load(
     name,
     function (gltf) {
-      scene.add(gltf.scene);
-      mesh.mesh.position.set(...pos);
+
+      sceneMesh.mesh.position.set(...pos);
       gltf.scene.receiveShadow = true;
-      //gltf.scene.children[0].name="Hammer"
-      mesh.mesh.add(gltf.scene);
+      console.log(gltf.scene.children[0].name)
+      gltf.scene.children[0].userData["click"]=()=>{alert("Clicked"+gltf.scene.children[0].name)};
+      sceneMesh.mesh.add(gltf.scene);
     },
     undefined,
     function (error) {
       console.error("Failed" + error);
     },
   );
-  return mesh;
+  return sceneMesh;
 }
 export { AddObject };

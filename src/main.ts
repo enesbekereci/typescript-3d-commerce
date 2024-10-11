@@ -5,11 +5,14 @@ import { AddObject } from "./addObject.ts";
 import { CSS2DRenderer } from "three/addons/renderers/CSS2DRenderer.js";
 import { AddLabel } from "./addLabel.ts";
 import {
+  addClickable,
   onDocumentKeyDown,
   onDocumentKeyUp,
+  onPointerDown,
   onPointerMove,
 } from "./inputControl.ts";
 import { addGUI } from "./addGUI.ts";
+
 
 const scene = new THREE.Scene();
 
@@ -24,7 +27,7 @@ var guicontainer = document.getElementById("lilgui");
 
 const width = parseInt(container?.getAttribute("width") || "100");
 const height = parseInt(container?.getAttribute("height") || "100");
-
+const window_size = new THREE.Vector2(width, height)
 renderer.setSize(width, height);
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
@@ -56,6 +59,9 @@ AddLabel("Hoe", hoe);
 scene.add(handle.mesh);
 AddLabel("Handle", handle);
 
+addClickable(hammer.mesh)
+addClickable(axe.mesh)
+
 const labelRenderer = new CSS2DRenderer();
 labelRenderer.setSize(width, height); //window.innerWidth, window.innerHeight );
 labelRenderer.domElement.style.position = "absolute";
@@ -65,9 +71,9 @@ document.body.appendChild(labelRenderer.domElement);
 let pointer = new THREE.Vector2();
 ///input
 document.addEventListener("pointermove", (event: MouseEvent) => {
-  onPointerMove(event, camera, pointer);
+  onPointerMove(event, camera, pointer, window_size);
 });
-//document.addEventListener( 'pointerdown', onPointerDown );
+document.addEventListener('pointerdown', onPointerDown);
 document.addEventListener("keydown", onDocumentKeyDown);
 document.addEventListener("keyup", onDocumentKeyUp);
 
@@ -81,10 +87,13 @@ function animate() {
   if (axe != undefined && axe.mesh != undefined) {
     axe.mesh.rotation.y += 0.01;
   }
+  if (hoe != undefined && hoe.mesh != undefined) {
+    hoe.mesh.rotation.y += 0.01;
+  }
   if (handle != undefined && handle.mesh != undefined) {
     handle.mesh.rotation.x += 0.01;
-	handle.mesh.rotation.y += 0.01;
-	handle.mesh.rotation.z += 0.01;
+    handle.mesh.rotation.y += 0.01;
+    handle.mesh.rotation.z += 0.01;
   }
   sphere.position.set(pointer.x * 2, pointer.y * 2, 0);
   renderer.render(scene, camera);
