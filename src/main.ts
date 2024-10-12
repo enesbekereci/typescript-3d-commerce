@@ -12,10 +12,11 @@ import {
   onPointerMove,
 } from "./inputControl.ts";
 import { addGUI } from "./addGUI.ts";
-import { addToAnimList, animateAll } from "./animator.ts";
+import { addAnim, addToAnimLoop, animateAll } from "./animator.ts";
+import { addCupboard } from "./addCupboard.ts";
 
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(55, 640 / 480, 0.1, 1000);
+const camera = new THREE.PerspectiveCamera(55, 640 / 480, 1, 100);
 
 const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setClearColor(0xadd8e6, 1);
@@ -37,21 +38,21 @@ camera.position.set(0, 0, 5);
 camera.lookAt(0, 0, 0);
 
 AddLight(scene);
-let sphere = AddPointer(scene);
+//let sphere = AddPointer(scene);
 
-let hammer = AddObject(scene, "tools/hammer.glb", [-2, 0, 0]);
-let axe = AddObject(scene, "tools/axe.glb", [-1, 0, 0]);
-let pickaxe = AddObject(scene, "tools/pickaxe.glb", [1, 0, 0]);
-let shovel = AddObject(scene, "tools/shovel.glb", [2, 0, 0]);
-let hoe = AddObject(scene, "tools/hoe.glb", [0, 0, 0]);
-let handle = AddObject(scene, "tools/handle.glb", [0, -2, 0]);
+// let hammer = AddObject(scene, "tools/hammer.glb", [-2, 0, 0]);
+// let axe = AddObject(scene, "tools/axe.glb", [-1, 0, 0]);
+// let pickaxe = AddObject(scene, "tools/pickaxe.glb", [1, 0, 0]);
+// let shovel = AddObject(scene, "tools/shovel.glb", [2, 0, 0]);
+// let hoe = AddObject(scene, "tools/hoe.glb", [0, 0, 0]);
+// let handle = AddObject(scene, "tools/handle.glb", [0, -2, 0]);
 
-hammer.then((mesh) => { addToAnimList(mesh, 0.05); scene.add(mesh); addClickable(mesh); AddLabel("Hammer", mesh) })
-axe.then((mesh) => { addToAnimList(mesh, 0.1); scene.add(mesh); addClickable(mesh); AddLabel("Axe", mesh); })
-pickaxe.then((mesh) => { addToAnimList(mesh, 0.15); scene.add(mesh); addClickable(mesh); AddLabel("Pickaxe", mesh) })
-shovel.then((mesh) => { addToAnimList(mesh, 0.2); scene.add(mesh); addClickable(mesh); AddLabel("Shovel", mesh) })
-hoe.then((mesh) => { addToAnimList(mesh, 0.25); scene.add(mesh); addClickable(mesh); AddLabel("Hoe", mesh) })
-handle.then((mesh) => { addToAnimList(mesh, 0.3); scene.add(mesh); addClickable(mesh); AddLabel("Handle", mesh) })
+// hammer.then((mesh) => { addToAnimList(mesh, 0.05); scene.add(mesh); addClickable(mesh); AddLabel("Hammer", mesh) })
+// axe.then((mesh) => { addToAnimList(mesh, 0.1); scene.add(mesh); addClickable(mesh); AddLabel("Axe", mesh); })
+// pickaxe.then((mesh) => { addToAnimList(mesh, 0.15); scene.add(mesh); addClickable(mesh); AddLabel("Pickaxe", mesh) })
+// shovel.then((mesh) => { addToAnimList(mesh, 0.2); scene.add(mesh); addClickable(mesh); AddLabel("Shovel", mesh) })
+// hoe.then((mesh) => { addToAnimList(mesh, 0.25); scene.add(mesh); addClickable(mesh); AddLabel("Hoe", mesh) })
+// handle.then((mesh) => { addToAnimList(mesh, 0.3); scene.add(mesh); addClickable(mesh); AddLabel("Handle", mesh) })
 
 const labelRenderer = new CSS2DRenderer();
 labelRenderer.setSize(width, height); //window.innerWidth, window.innerHeight );
@@ -81,12 +82,14 @@ function onWindowResize() {
 }
 
 addGUI(guicontainer!)
+let dolap=addCupboard( "tools/dolap.glb", [0, -4, -4]);
+dolap.then((mesh) => { scene.add(mesh); AddLabel("Dolap", mesh);addToAnimLoop(mesh,0.0005) })
 
 function animate() {
   requestAnimationFrame(animate);
   animateAll();
 
-  sphere.position.set(pointer.x * 2, pointer.y * 2, 0);
+  //sphere.position.set(pointer.x * 2, pointer.y * 2, 0);
   renderer.render(scene, camera);
   labelRenderer.render(scene, camera);
 }

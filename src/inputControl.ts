@@ -14,7 +14,6 @@ function onPointerMove(
 ) {
   //TODO   ::: raycaster on plane threejs
    const rect = renderer.domElement.getBoundingClientRect();
-  console.log(rect)
   // mouse.x = ( ( event.clientX - rect.left ) / ( rect.right - rect.left ) ) * 2 - 1;
   // mouse.y = - ( ( event.clientY - rect.top ) / ( rect.bottom - rect.top) ) * 2 + 1;
   pointer.set(
@@ -22,15 +21,18 @@ function onPointerMove(
     -((event.clientY- rect.top) / ( rect.bottom - rect.top)) * 2 + 1,
   );
   raycaster.setFromCamera(pointer, camera);
-  const intersects = raycaster.intersectObjects(objects, true);
+  const intersects = raycaster.intersectObjects(objects);
 
   if (intersects.length > 0) {
     const intersect = intersects[0];
-    currentObject = intersect.object
-    setHighlight(currentObject, new THREE.Color(0x00eaff))
+    if (intersect.object.parent!=null)
+    currentObject = intersect.object.parent
+    if(currentObject!=undefined)
+      1;
+    //setHighlight(currentObject, new THREE.Color(0x00eaff))
   } else {
     if (currentObject != undefined)
-      setHighlight(currentObject!, new THREE.Color(0x000000))
+      //setHighlight(currentObject!, new THREE.Color(0x000000))
       currentObject = undefined
   }
 }
