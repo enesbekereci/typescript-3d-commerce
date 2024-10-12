@@ -6,15 +6,20 @@ let raycaster = new THREE.Raycaster();
 let objects: THREE.Object3D[] = [];
 let currentObject: THREE.Object3D | undefined;
 function onPointerMove(
+  renderer:THREE.WebGLRenderer,
   event: MouseEvent,
   camera: THREE.Camera,
   pointer: THREE.Vector2,
   window_size: THREE.Vector2,
 ) {
   //TODO   ::: raycaster on plane threejs
+   const rect = renderer.domElement.getBoundingClientRect();
+  console.log(rect)
+  // mouse.x = ( ( event.clientX - rect.left ) / ( rect.right - rect.left ) ) * 2 - 1;
+  // mouse.y = - ( ( event.clientY - rect.top ) / ( rect.bottom - rect.top) ) * 2 + 1;
   pointer.set(
-    (event.clientX / window_size.x) * 2 - 1,
-    -(event.clientY / window_size.y) * 2 + 1,
+    ((event.clientX- rect.left )/ ( rect.right - rect.left )) * 2 - 1,
+    -((event.clientY- rect.top) / ( rect.bottom - rect.top)) * 2 + 1,
   );
   raycaster.setFromCamera(pointer, camera);
   const intersects = raycaster.intersectObjects(objects, true);

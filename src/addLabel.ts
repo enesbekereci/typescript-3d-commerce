@@ -3,7 +3,7 @@ import { CSS2DObject } from "three/addons/renderers/CSS2DRenderer.js";
 
 function AddLabel(
   name: string,
-  mesh: THREE.Object3D,
+  mesh: THREE.Object3D
 ) {
   const moonDiv = document.createElement("div");
   moonDiv.className = "label";

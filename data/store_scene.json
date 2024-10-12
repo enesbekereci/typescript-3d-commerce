@@ -1,0 +1,13 @@
+{
+    "name": "title",
+    "file":"",
+    "camera_position":"",
+    "objects": [
+        {
+            "object_name": "object_model_file",
+            "position": "0:0:0",
+            "rotation": "0:0:0",
+            "type":""
+        }
+    ]
+}

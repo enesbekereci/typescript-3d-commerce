@@ -56,17 +56,29 @@ handle.then((mesh) => { addToAnimList(mesh, 0.3); scene.add(mesh); addClickable(
 const labelRenderer = new CSS2DRenderer();
 labelRenderer.setSize(width, height); //window.innerWidth, window.innerHeight );
 labelRenderer.domElement.style.position = "absolute";
-labelRenderer.domElement.style.top = "0px";
+labelRenderer.domElement.style.top = renderer.domElement.getBoundingClientRect().y + "px";
+labelRenderer.domElement.style.left = renderer.domElement.getBoundingClientRect().x + "px";
 document.body.appendChild(labelRenderer.domElement);
 
 let pointer = new THREE.Vector2();
 ///input
 document.addEventListener("pointermove", (event: MouseEvent) => {
-  onPointerMove(event, camera, pointer, window_size);
+  onPointerMove(renderer, event, camera, pointer, window_size);
 });
 document.addEventListener('pointerdown', onPointerDown);
 document.addEventListener("keydown", onDocumentKeyDown);
 document.addEventListener("keyup", onDocumentKeyUp);
+
+window.addEventListener('resize', onWindowResize, false);
+
+function onWindowResize() {
+  //camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  //renderer.setSize( window.innerWidth, window.innerHeight );
+  labelRenderer.domElement.style.top = renderer.domElement.getBoundingClientRect().y + "px";
+  labelRenderer.domElement.style.left = renderer.domElement.getBoundingClientRect().x + "px";
+
+}
 
 addGUI(guicontainer!)
 
