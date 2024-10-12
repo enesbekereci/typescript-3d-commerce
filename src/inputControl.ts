@@ -28,17 +28,20 @@ function onPointerMove(
     if (intersect.object.parent!=null)
     currentObject = intersect.object.parent
     if(currentObject!=undefined)
-      1;
-    //setHighlight(currentObject, new THREE.Color(0x00eaff))
+    setHighlight(currentObject, new THREE.Color(0x00eaff))
   } else {
     if (currentObject != undefined)
-      //setHighlight(currentObject!, new THREE.Color(0x000000))
+      setHighlight(currentObject!, new THREE.Color(0x000000))
       currentObject = undefined
   }
 }
 
 function setHighlight(object: THREE.Object3D, color: THREE.Color) {
-  ((object as THREE.Mesh).material as THREE.MeshStandardMaterial).emissive.set(color);
+ // let mat = ((object as THREE.Mesh).material as THREE.MeshStandardMaterial).clone();
+   //       mat.wireframe = true;
+     //     (object as THREE.Mesh).material = mat   ; 
+  //((object as THREE.Mesh).material as THREE.MeshStandardMaterial).emissive.set(color);
+  //(object as THREE.Mesh).material=new THREE.MeshBasicMaterial()
 }
 
 function onPointerDown(

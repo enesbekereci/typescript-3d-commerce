@@ -10,7 +10,7 @@ async function addCupboard(
   const load = await loader.loadAsync(name).then((gltf) => {
     gltf.scene.receiveShadow = true;
     gltf.scene.position.set(...pos);
-    gltf.scene.rotation.set(0, -45, 0);
+    gltf.scene.rotation.set(0, -2, 0);
     for (let i = 0; i < gltf.scene.children.length; i++) {
       let child = gltf.scene.children[i]
       console.log(child.name)
