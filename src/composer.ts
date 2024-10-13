@@ -29,7 +29,12 @@ function addComposer(renderer: THREE.WebGLRenderer, scene: THREE.Scene, camera: 
     //  const effectFXAA = new ShaderPass( FXAAShader );
     //  effectFXAA.uniforms[ 'resolution' ].value.set( 1/width, 1/height );
     //  composer.addPass( effectFXAA );
-
+//todo try1
+   // fxaaPass.material.uniforms[ 'resolution' ].value.x = 1 / ( container.offsetWidth * pixelRatio );
+    //fxaaPass.material.uniforms[ 'resolution' ].value.y = 1 / ( container.offsetHeight * pixelRatio );
+//todo try 2
+// https://discourse.threejs.org/t/awful-aliasing-when-using-post-processing/8596/6
+//rendertarget  
 
     //  const outputPass = new OutputPass();
     //  composer.addPass( outputPass );
